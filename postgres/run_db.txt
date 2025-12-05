@@ -1,0 +1,1 @@
+sudo docker run --rm --name kg-db --env-file .env --net kittygram -v kg_data:/var/lib/postgresql/data/ postgres:13.10
