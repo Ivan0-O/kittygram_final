@@ -1,5 +1,8 @@
 # Kittygram
 
+<img width="2233" height="1284" alt="image" src="https://github.com/user-attachments/assets/91ba5837-8240-4491-a4cb-e4164cff5b06" />
+<img width="1095" height="1220" alt="image" src="https://github.com/user-attachments/assets/206f2f36-7c0e-4979-a244-ab7ccba668a9" />
+
 ## About Kittygram
 
 Kittygram is a simple social network where you can share your cat with the internet :3
