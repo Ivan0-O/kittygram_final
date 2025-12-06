@@ -1,26 +1,56 @@
-#  Как работать с репозиторием финального задания
+# Kittygram
 
-## Что нужно сделать
+## About Kittygram
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
+Kittygram is a simple social network where you can share your cat with the internet :3
 
-## Как проверить работу с помощью автотестов
+The list of features:
+- Post your cat: choose name, color, birth date upload an image and add some achievements.
+- Edit your cat: change information or delete the post entirely.
+- View other people's cats and leave some comments.
 
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
-```
+## Tech Stack
 
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
+- **Frontend**: React.js
+- **Backend**: Django (Python)
+- **Database**: PostgreSQL
+- **Server**: Nginx (reverse proxy & static file serving)
+- **API**: RESTful API architecture
 
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
+## Setup & Installation
 
-## Чек-лист для проверки перед отправкой задания
+### Prerequisites
+- Docker Engine (v20.10+)
+- Docker Compose (v2.10+)
 
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+### Environment Configuration
+
+1. **Create `.env` file** in the project root:
+    ```bash
+    cp .env.example .env
+    ```
+
+2. **Place your secrets in `.env` file**. Optionally: change the Django `settings.py` file: remove `DEBUG = True` and add `ALLOWED_HOSTS = ['your_domain.com', 'www.your_domain.com']` if you want a production build.
+
+3. **Build the images and start the servers**:
+    ```bash
+    docker-compose -f docker-compose.production.yml up --build
+    ```
+
+4. **Apply database migrations**:
+    ```bash
+    docker-compose -f docker-compose.production.yml exec backend python manage.py migrate
+    ```
+
+5. **Create yourself a superuser** (Optional):
+    ```bash
+    docker-compose -f docker-compose.production.yml exec backend python manage.py createsuperuser
+    ```
+
+6. **Collect Django static files**:
+    ```bash
+    docker-compose -f docker-compose.production.yml exec backend python manage.py collectstatic --noinput
+    ```
+
+7. **Visit `http://localhost:8000/`**
+
